@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Renuvia — E-Waste Has Value</title>
 <link rel="stylesheet" href="style.css">
 <style>
@@ -124,8 +124,8 @@
   transition: transform .7s cubic-bezier(.77,0,.175,1);
 }
 .slide {
-  min-width: calc(50% - 10px);
-  aspect-ratio: 16/9;
+  min-width: 100%;
+  aspect-ratio: 16;
   border-radius: var(--r-lg); overflow: hidden;
   position: relative; flex-shrink: 0;
 }
@@ -335,8 +335,12 @@
 .btn-dark:hover { transform: translateY(-2px); gap: 16px; }
 
 /* ── RESPONSIVE ── */
+@media/* ═══ RESPONSIVE — INDEX ═══ */
+
+/* ── TABLET ── */
 @media (max-width:1024px) {
   #hero { padding: 0 32px 64px; }
+  .hero-h1 { font-size: clamp(44px,7vw,80px); }
   .svc-grid { grid-template-columns: repeat(2,1fr); }
   .stats-inner { grid-template-columns: repeat(2,1fr); }
   .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
@@ -349,25 +353,81 @@
   #stats { padding: 0 32px; }
   #services-preview, #slider-section, #process-preview, #why-strip, #home-cta { padding: 80px 32px; }
   .svc-head { margin-bottom: 48px; }
+  #slider-section { padding: 80px 0 80px; }
+  .slider-head { padding: 0 32px; }
+  .slider-controls { padding: 0 32px; }
 }
+
+/* ── MOBILE ── */
 @media (max-width:768px) {
-  #hero { padding: 0 20px 56px; }
+  /* Hero */
+  #hero { padding: 0 20px 56px; min-height: 100svh; }
   .hero-scroll { display: none; }
-  .svc-grid { grid-template-columns: 1fr; }
+  .hero-h1 { font-size: clamp(40px,10vw,60px); line-height: .94; }
+  .hero-sub { font-size: 15px; }
+  .hero-eyebrow { font-size: 10px; padding: 6px 12px; }
+  .hero-btns { flex-direction: column; gap: 12px; }
+  .hero-btns .btn-p,
+  .hero-btns .btn-s { width: 100%; justify-content: center; }
+
+  /* Stats */
+  #stats { padding: 0 20px; }
   .stats-inner { grid-template-columns: 1fr 1fr; }
-  .steps-row { grid-template-columns: 1fr 1fr; }
-  .slide { min-width: 85%; }
-  .cta-box { padding: 36px 28px; flex-direction: column; align-items: flex-start; }
-  #stats, #services-preview, #slider-section, #process-preview, #why-strip, #home-cta { padding: 64px 20px; }
-  .svc-head { flex-direction: column; align-items: flex-start; }
+  .stat-item { padding: 28px 16px; }
+  .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+  .stat-item:nth-child(even) { border-right: none; }
+  .stat-n { font-size: 32px; }
+
+  /* Slider */
+  #slider-section { padding: 56px 0; }
+  .slider-head { padding: 0 20px; margin-bottom: 36px; }
+  .slider-controls { padding: 0 20px; }
+  .slide-caption { font-size: 12px; padding: 20px 16px 16px; }
+
+  /* Services Grid */
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-card { padding: 28px 24px; }
+  .svc-head { flex-direction: column; align-items: flex-start; gap: 20px; }
+
+  /* Steps */
+  .steps-row { grid-template-columns: 1fr 1fr; gap: 28px; }
+
+  /* Why */
+  .why-inner { grid-template-columns: 1fr; }
+  .why-big { font-size: 60px; }
+  .cert-row { flex-wrap: wrap; }
+
+  /* Video highlight */
+  #video-highlight { height: 50vh; }
+  .vh-content blockquote { font-size: clamp(20px,5vw,32px); }
+
+  /* CTA */
+  .cta-box { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 28px; }
+  .cta-box h2 { font-size: clamp(22px,5vw,32px); }
+
+  /* Sections padding */
+  #services-preview, #process-preview, #why-strip, #home-cta { padding: 64px 20px; }
+  #slider-section { padding: 56px 0; }
 }
+
+/* ── SMALL MOBILE ── */
 @media (max-width:480px) {
-  .stats-inner { grid-template-columns: 1fr; }
-  .stat-item { border-right: none !important; }
-  .stat-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
-  .stat-item:last-child { border-bottom: none; }
-  .steps-row { grid-template-columns: 1fr; }
+  .hero-h1 { font-size: 36px; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .stat-item { border-right: none !important; border-bottom: 1px solid var(--border); }
+  .stat-item:nth-child(odd) { border-right: 1px solid var(--border) !important; }
+  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+  .steps-row { grid-template-columns: 1fr; gap: 20px; }
+  .step-circle { margin-bottom: 16px; }
+  .svc-grid { grid-template-columns: 1fr; }
 }
+
+/* ── TOUCH SWIPE SLIDER ── */
+@media (hover: none) {
+  .slide:hover img { transform: none; filter: brightness(.75) saturate(.7); }
+  .sl-arrow { width: 40px; height: 40px; font-size: 16px; }
+}
+
 </style>
 </head>
 <body>
@@ -394,6 +454,9 @@
   </button>
 </nav>
 <div class="mobile-menu" id="mob-menu">
+  <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
   <a href="index.html" data-page>Home</a>
   <a href="services.html" data-page>Services</a>
   <a href="about.html" data-page>About</a>
@@ -404,7 +467,7 @@
 <!-- HERO (video background) -->
 <section id="hero">
   <div class="hero-video-wrap">
-    <iframe src="https://www.youtube.com/embed/YlhVHIVmF30?autoplay=1&mute=1&loop=1&playlist=YlhVHIVmF30&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/oeR7mbFZXgU?autoplay=1&mute=1&loop=1&playlist=oeR7mbFZXgU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -456,15 +519,15 @@
   <div class="slider-track-wrap">
     <div class="slider-track" id="sliderTrack">
       <div class="slide">
-        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="E-waste collection facility">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454480/Gemini_Generated_Image_z70irz70irz70irz_wmtrzv.png" alt="E-waste collection facility">
         <div class="slide-caption">Collection & Sorting Facility</div>
       </div>
       <div class="slide">
-        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Circuit boards being recycled">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454498/Gemini_Generated_Image_m8kjhom8kjhom8kj_ojbid4.png" alt="Circuit boards being recycled">
         <div class="slide-caption">Circuit Board Processing</div>
       </div>
       <div class="slide">
-        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Secure data destruction">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454520/Gemini_Generated_Image_9dohk09dohk09doh_yparsk.png" alt="Secure data destruction">
         <div class="slide-caption">Secure Data Destruction</div>
       </div>
       <div class="slide">
@@ -472,7 +535,7 @@
         <div class="slide-caption">Material Separation & Recovery</div>
       </div>
       <div class="slide">
-        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="E-waste logistics">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454480/Gemini_Generated_Image_z70irz70irz70irz_wmtrzv.png" alt="E-waste logistics">
         <div class="slide-caption">Logistics & Transportation</div>
       </div>
       <div class="slide">
@@ -480,7 +543,7 @@
         <div class="slide-caption">Certified Recycling Process</div>
       </div>
       <div class="slide">
-        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Industrial processing">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454498/Gemini_Generated_Image_m8kjhom8kjhom8kj_ojbid4.png" alt="Industrial processing">
         <div class="slide-caption">Industrial E-Waste Processing</div>
       </div>
       <div class="slide">
@@ -702,7 +765,7 @@
   const track = document.getElementById('sliderTrack');
   const slides = track.querySelectorAll('.slide');
   const dotsWrap = document.getElementById('sliderDots');
-  const total = Math.ceil(slides.length / 2); // 2 visible
+  const total = slides.length; // 1 visible at a time
   let current = 0;
   let autoTimer;
 
@@ -717,7 +780,7 @@
   function goTo(idx){
     current = (idx+total)%total;
     const slideW = slides[0].offsetWidth + 20; // gap
-    track.style.transform = `translateX(-${current * slideW * 2}px)`;
+    track.style.transform = `translateX(-${current * slideW}px)`;
     dotsWrap.querySelectorAll('.slider-dot').forEach((d,i)=>{
       d.classList.toggle('active', i===current);
     });
@@ -732,6 +795,16 @@
 
   // Recalc on resize
   window.addEventListener('resize',()=>goTo(current));
+
+  // ── TOUCH SWIPE SUPPORT ──
+  let touchStartX = 0, touchEndX = 0;
+  const wrap = document.querySelector('.slider-track-wrap');
+  wrap.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+  wrap.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) { goTo(diff > 0 ? current+1 : current-1); resetAuto(); }
+  }, {passive:true});
 })();
 </script>
 </body>
