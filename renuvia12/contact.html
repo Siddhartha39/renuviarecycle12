@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Contact — Renuvia</title>
 <link rel="stylesheet" href="style.css">
 <style>
@@ -180,6 +180,32 @@
   .f-row { grid-template-columns: 1fr; }
   .cw-grid { grid-template-columns: 1fr; }
 }
+
+/* ═══ RESPONSIVE — CONTACT (mobile patch) ═══ */
+@media (max-width:768px) {
+  #contact-hero { padding: 0 20px 48px; min-height:50vh; }
+  #contact-hero .page-title { font-size: clamp(36px,9vw,52px); line-height:.93; }
+  #contact-main { padding: 56px 20px; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .ct-form-wrap { position: static; padding: 24px 20px; }
+  .ct-form-title { margin-bottom: 24px; }
+  .f-row { grid-template-columns: 1fr; gap: 14px; }
+  .ct-detail { padding: 18px 0; }
+  .ct-detail-body h4 { font-size: 13px; }
+  .ct-detail-body p { font-size: 13px; }
+  #contact-why { padding: 56px 20px; }
+  .cw-grid { grid-template-columns: 1fr; gap: 16px; }
+  .cw-card { padding: 24px 20px; }
+  #faq { padding: 56px 20px; }
+  .faq-q { font-size: 15px; padding: 20px 0; }
+  .faq-a { font-size: 13px; }
+}
+@media (max-width:480px) {
+  #contact-hero .page-title { font-size: 30px; }
+  .ct-form-wrap { padding: 20px 16px; }
+  .ct-certifications { gap: 6px; }
+  .ct-cert { font-size: 10px; padding: 5px 10px; }
+}
 </style>
 </head>
 <body>
@@ -200,6 +226,9 @@
   <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mob-menu">
+  <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
   <a href="index.html" data-page>Home</a>
   <a href="services.html" data-page>Services</a>
   <a href="about.html" data-page>About</a>
