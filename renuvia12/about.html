@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>About — Renuvia</title>
 <link rel="stylesheet" href="style.css">
 <style>
@@ -198,6 +198,42 @@
   .who-img { aspect-ratio: 16/9 !important; }
   .proc-item { grid-template-columns: 60px 1fr; gap: 24px; }
 }
+
+/* ═══ RESPONSIVE — ABOUT (mobile patch) ═══ */
+@media (max-width:768px) {
+  #about-hero { padding: 0 20px 48px; min-height:60vh; }
+  #about-hero .page-title { font-size: clamp(36px,9vw,52px); line-height:.93; }
+  #statement { padding: 56px 20px; }
+  .statement-inner { grid-template-columns: 1fr; gap: 36px; }
+  .statement-right .big-text { font-size: clamp(22px,5vw,30px); }
+  .highlight-line { font-size: 16px; padding-left: 18px; }
+  #who { padding: 56px 20px; }
+  .who-grid { grid-template-columns: 1fr; gap: 36px; }
+  .who-img-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .who-img:nth-child(1) { grid-column: span 2; aspect-ratio: 16/7 !important; }
+  .who-img:nth-child(2), .who-img:nth-child(3) { aspect-ratio: 4/3; }
+  #why-exist { padding: 56px 20px; }
+  .why-exist-cards { grid-template-columns: 1fr; gap: 16px; }
+  .we-card { padding: 28px 24px; }
+  .we-card-n { font-size: 36px; }
+  #abt-process { padding: 56px 20px; }
+  .proc-item { grid-template-columns: 52px 1fr; gap: 20px; padding: 24px 0; }
+  .proc-body h4 { font-size: 17px; }
+  #approach { padding: 56px 20px; }
+  .approach-inner { grid-template-columns: 1fr; gap: 36px; }
+  .approach-img { aspect-ratio: 16/9; border-radius: var(--r-lg); }
+  .closing-statement { padding: 24px; }
+  .closing-statement p { font-size: 17px; }
+  #why { padding: 56px 20px; }
+  .why-items { grid-template-columns: 1fr; gap: 16px; }
+  .why-card { padding: 24px 20px; }
+  .why-card:last-child { grid-column: span 1 !important; }
+}
+@media (max-width:480px) {
+  #about-hero .page-title { font-size: 32px; }
+  .who-img-grid { grid-template-columns: 1fr; }
+  .who-img:nth-child(1) { grid-column: auto; aspect-ratio: 16/8 !important; }
+}
 </style>
 </head>
 <body>
@@ -218,6 +254,9 @@
   <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mob-menu">
+  <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
   <a href="index.html" data-page>Home</a>
   <a href="services.html" data-page>Services</a>
   <a href="about.html" data-page>About</a>
@@ -266,13 +305,13 @@
   <div class="who-grid">
     <div class="who-img-grid" data-reveal="left">
       <div class="who-img">
-        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Renuvia facility" style="height:100%;min-height:400px;">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454693/ChatGPT_Image_May_22_2026_12_02_28_PM_lwt3um.png" alt="Renuvia facility" style="height:100%;min-height:400px;">
       </div>
       <div class="who-img">
-        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="E-waste sorting">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454637/Gemini_Generated_Image_19glx419glx419gl_nghpnz.png" alt="E-waste sorting">
       </div>
       <div class="who-img">
-        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Circuit board processing">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454534/Gemini_Generated_Image_qks89lqks89lqks8_zbneuc.png" alt="Circuit board processing">
       </div>
     </div>
     <div class="who-text" data-reveal="right">
@@ -378,7 +417,7 @@
 <section id="approach">
   <div class="approach-inner">
     <div class="approach-img" data-reveal="left">
-      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Renuvia approach">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454596/Gemini_Generated_Image_d1tb8bd1tb8bd1tb_x1ohnz.png" alt="Renuvia approach">
     </div>
     <div class="approach-text" data-reveal="right">
       <span class="label">Our Approach</span>
