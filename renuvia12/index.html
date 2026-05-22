@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renuvia — E-Waste Has Value</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ═══ HOMEPAGE SPECIFIC ═══ */
+
+/* ── HERO ── */
+#hero {
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 0 56px 80px;
+  overflow: hidden;
+}
+.hero-video-wrap {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-video-wrap video {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(.35) saturate(.6);
+}
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(0deg, rgba(8,8,7,.95) 0%, rgba(8,8,7,.5) 40%, rgba(8,8,7,.25) 100%),
+    radial-gradient(ellipse 70% 50% at 80% 30%, rgba(200,242,64,.07) 0%, transparent 60%);
+}
+.hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 36px;
+  border: 1px solid var(--border3); padding: 7px 16px; border-radius: 2px;
+  background: rgba(200,242,64,.05);
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 7px; height: 7px; background: var(--accent);
+  border-radius: 50%; animation: blink 2.2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.3; transform:scale(.6); }
+}
+.hero-h1 {
+  font-family: var(--ff-h);
+  font-size: clamp(54px, 8vw, 114px);
+  font-weight: 800; letter-spacing: -.04em; line-height: .92;
+  color: var(--text); margin-bottom: 36px;
+}
+.hero-h1 .line2 { color: var(--accent); display: block; }
+.hero-sub {
+  font-size: clamp(16px, 1.8vw, 20px); color: var(--text2);
+  font-weight: 300; max-width: 520px; line-height: 1.65; margin-bottom: 48px;
+}
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+.hero-scroll {
+  position: absolute; bottom: 40px; right: 56px; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  opacity: .5;
+}
+.hero-scroll span {
+  font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text3); writing-mode: vertical-rl;
+}
+.scroll-line {
+  width: 1px; height: 60px; background: var(--text3);
+  position: relative; overflow: hidden;
+}
+.scroll-line::after {
+  content: ''; position: absolute;
+  top: -100%; left: 0; width: 100%; height: 100%;
+  background: var(--accent);
+  animation: scrollline 2s ease-in-out infinite;
+}
+@keyframes scrollline {
+  0%   { top:-100%; }
+  50%  { top:0%; }
+  100% { top:100%; }
+}
+
+/* ── STATS STRIP ── */
+#stats {
+  background: var(--bg2); padding: 0 56px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stats-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4,1fr);
+}
+.stat-item {
+  padding: 48px 32px;
+  border-right: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item::before {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width .5s cubic-bezier(.4,0,.2,1);
+}
+.stat-item:hover::before { width: 100%; }
+.stat-n {
+  font-family: var(--ff-h); font-size: clamp(36px,4vw,56px);
+  font-weight: 800; letter-spacing: -.03em; color: var(--text);
+  line-height: 1;
+}
+.stat-n .accent { color: var(--accent); }
+.stat-l { font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: .1em; margin-top: 8px; }
+
+/* ── IMAGE SLIDER ── */
+#slider-section { padding: 110px 56px; background: var(--bg); position: relative; overflow: hidden; }
+.slider-head { max-width: 1200px; margin: 0 auto 60px; }
+.slider-track-wrap {
+  position: relative; overflow: hidden;
+  max-width: 1200px; margin: 0 auto;
+}
+.slider-track {
+  display: flex; gap: 20px;
+  transition: transform .7s cubic-bezier(.77,0,.175,1);
+}
+.slide {
+  min-width: calc(50% - 10px);
+  aspect-ratio: 16/9;
+  border-radius: var(--r-lg); overflow: hidden;
+  position: relative; flex-shrink: 0;
+}
+.slide img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .7s cubic-bezier(.4,0,.2,1), filter .4s;
+  filter: brightness(.75) saturate(.7);
+}
+.slide:hover img { transform: scale(1.05); filter: brightness(.9) saturate(.9); }
+.slide-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 32px 28px 24px;
+  background: linear-gradient(0deg, rgba(8,8,7,.9) 0%, transparent 100%);
+  font-size: 13px; color: var(--text2); letter-spacing: .05em;
+}
+.slider-controls {
+  max-width: 1200px; margin: 28px auto 0;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.slider-dots { display: flex; gap: 8px; }
+.slider-dot {
+  width: 28px; height: 2px; background: var(--border2); border: none;
+  cursor: pointer; transition: background var(--trans), width var(--trans);
+  border-radius: 2px; padding: 0;
+}
+.slider-dot.active { background: var(--accent); width: 48px; }
+.slider-arrows { display: flex; gap: 12px; }
+.sl-arrow {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--border2); background: transparent;
+  color: var(--text); cursor: pointer; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color var(--trans), background var(--trans), transform .15s;
+}
+.sl-arrow:hover { border-color: var(--accent); background: rgba(200,242,64,.08); transform: scale(1.05); }
+
+/* ── SERVICES PREVIEW ── */
+#services-preview { background: var(--bg2); padding: 110px 56px; }
+.svc-head { max-width: 1200px; margin: 0 auto 72px; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; }
+.svc-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg); overflow: hidden;
+}
+.svc-card {
+  background: var(--bg2); padding: 40px 32px 36px;
+  position: relative; overflow: hidden; cursor: pointer;
+  transition: background var(--trans);
+  text-decoration: none; color: inherit; display: block;
+}
+.svc-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(200,242,64,.06) 0%, transparent 70%);
+  opacity: 0; transition: opacity var(--trans);
+}
+.svc-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width .4s cubic-bezier(.4,0,.2,1);
+}
+.svc-card:hover { background: var(--bg3); }
+.svc-card:hover::before { opacity: 1; }
+.svc-card:hover::after { width: 100%; }
+.svc-num { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-bottom: 28px; }
+.svc-icon { margin-bottom: 24px; }
+.svc-icon svg { width: 36px; height: 36px; stroke: var(--accent); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.svc-title { font-family: var(--ff-h); font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 12px; letter-spacing: -.01em; }
+.svc-desc { font-size: 13px; color: var(--text2); line-height: 1.7; font-weight: 300; }
+.svc-link {
+  margin-top: 24px; font-size: 12px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--accent);
+  display: inline-flex; align-items: center; gap: 6px;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity .3s, transform .3s;
+}
+.svc-card:hover .svc-link { opacity: 1; transform: none; }
+
+/* ── PROCESS PREVIEW ── */
+#process-preview { background: var(--bg); padding: 110px 56px; position: relative; overflow: hidden; }
+.process-bg-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: var(--ff-h); font-size: 220px; font-weight: 800;
+  color: rgba(255,255,255,.018); letter-spacing: -.05em;
+  white-space: nowrap; pointer-events: none; user-select: none;
+}
+.steps-row {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(5,1fr);
+  position: relative;
+}
+.steps-row::before {
+  content: ''; position: absolute;
+  top: 27px; left: 9%; right: 9%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2) 15%, var(--border2) 85%, transparent);
+}
+.step-card {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; padding: 0 12px; position: relative;
+}
+.step-circle {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--bg3); border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-h); font-size: 14px; font-weight: 700;
+  color: var(--accent); margin-bottom: 28px; position: relative; z-index: 1;
+  transition: background .3s, border-color .3s, box-shadow .3s;
+}
+.step-card:hover .step-circle {
+  background: rgba(200,242,64,.12);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 8px rgba(200,242,64,.06);
+}
+.step-t { font-family: var(--ff-h); font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.step-d { font-size: 12px; color: var(--text3); line-height: 1.6; }
+
+/* ── VIDEO HIGHLIGHT ── */
+#video-highlight { background: var(--bg2); padding: 0; position: relative; overflow: hidden; height: 60vh; min-height: 400px; }
+.vh-video { width: 100%; height: 100%; object-fit: cover; filter: brightness(.4) saturate(.5); }
+.vh-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(8,8,7,.85) 0%, rgba(8,8,7,.4) 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.vh-content { text-align: center; padding: 40px; }
+.vh-content blockquote {
+  font-family: var(--ff-h); font-size: clamp(24px,4vw,48px);
+  font-weight: 800; letter-spacing: -.03em; color: var(--text);
+  line-height: 1.1; max-width: 800px;
+}
+.vh-content blockquote em { font-style: normal; color: var(--accent); }
+.vh-content p { margin-top: 20px; font-size: 15px; color: var(--text2); font-weight: 300; }
+
+/* ── WHY STRIP ── */
+#why-strip { background: var(--bg); padding: 110px 56px; }
+.why-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+}
+.why-left {}
+.why-list { margin-top: 48px; display: flex; flex-direction: column; }
+.why-item {
+  display: flex; align-items: flex-start; gap: 24px;
+  padding: 22px 0; border-bottom: 1px solid var(--border);
+  transition: padding var(--trans);
+}
+.why-item:first-child { border-top: 1px solid var(--border); }
+.why-item:hover { padding-left: 10px; }
+.wi-n {
+  font-family: var(--ff-h); font-size: 12px; font-weight: 700;
+  color: var(--accent); min-width: 30px; padding-top: 2px;
+}
+.wi-body h4 { font-family: var(--ff-h); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.wi-body p { font-size: 13px; color: var(--text2); font-weight: 300; line-height: 1.65; }
+.why-right {
+  position: relative;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 48px;
+  overflow: hidden;
+}
+.why-right-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(200,242,64,.09), transparent 60%),
+    repeating-linear-gradient(45deg, transparent, transparent 28px, rgba(255,255,255,.012) 28px, rgba(255,255,255,.012) 29px);
+}
+.why-big {
+  position: relative; z-index: 1;
+  font-family: var(--ff-h); font-size: 80px; font-weight: 800;
+  letter-spacing: -.04em; color: var(--text); line-height: 1;
+}
+.why-big span { color: var(--accent); }
+.why-right p { position: relative; z-index: 1; font-size: 14px; color: var(--text2); margin-top: 16px; line-height: 1.7; font-weight: 300; }
+.cert-row {
+  position: relative; z-index: 1;
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px;
+}
+.cert-tag {
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent); border: 1px solid var(--border3);
+  background: rgba(200,242,64,.06); padding: 6px 14px; border-radius: 2px;
+}
+
+/* ── FINAL CTA ── */
+#home-cta { background: var(--bg2); padding: 80px 56px; }
+.cta-box {
+  max-width: 1200px; margin: 0 auto;
+  background: var(--accent); border-radius: var(--r-lg);
+  padding: 64px 80px;
+  display: flex; justify-content: space-between; align-items: center; gap: 40px; flex-wrap: wrap;
+}
+.cta-box h2 {
+  font-family: var(--ff-h); font-size: clamp(28px,3.5vw,46px);
+  font-weight: 800; letter-spacing: -.025em; color: #080807; line-height: 1.1;
+}
+.cta-box p { font-size: 15px; color: rgba(8,8,7,.6); margin-top: 10px; font-weight: 300; }
+.btn-dark {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--ff-b); font-size: 13px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  background: #080807; color: var(--accent);
+  padding: 14px 32px; border-radius: var(--r);
+  text-decoration: none; border: none; cursor: pointer;
+  transition: transform .15s, gap .2s; white-space: nowrap;
+}
+.btn-dark:hover { transform: translateY(-2px); gap: 16px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:1024px) {
+  #hero { padding: 0 32px 64px; }
+  .svc-grid { grid-template-columns: repeat(2,1fr); }
+  .stats-inner { grid-template-columns: repeat(2,1fr); }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+  .steps-row { grid-template-columns: repeat(3,1fr); gap: 32px; }
+  .steps-row::before { display: none; }
+  .why-inner { grid-template-columns: 1fr; gap: 48px; }
+  .cta-box { padding: 48px; }
+  #stats { padding: 0 32px; }
+  #services-preview, #slider-section, #process-preview, #why-strip, #home-cta { padding: 80px 32px; }
+  .svc-head { margin-bottom: 48px; }
+}
+@media (max-width:768px) {
+  #hero { padding: 0 20px 56px; }
+  .hero-scroll { display: none; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .steps-row { grid-template-columns: 1fr 1fr; }
+  .slide { min-width: 85%; }
+  .cta-box { padding: 36px 28px; flex-direction: column; align-items: flex-start; }
+  #stats, #services-preview, #slider-section, #process-preview, #why-strip, #home-cta { padding: 64px 20px; }
+  .svc-head { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width:480px) {
+  .stats-inner { grid-template-columns: 1fr; }
+  .stat-item { border-right: none !important; }
+  .stat-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .stat-item:last-child { border-bottom: none; }
+  .steps-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TRANSITION OVERLAY -->
+<div id="page-transition"></div>
+
+<!-- CURSOR -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo" data-page>Ren<span>uvia</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-page>Home</a></li>
+    <li><a href="services.html" data-page>Services</a></li>
+    <li><a href="about.html" data-page>About</a></li>
+    <li><a href="contact.html" data-page>Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta" data-page>Get Free Pickup</a>
+  <button class="hamburger" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mob-menu">
+  <a href="index.html" data-page>Home</a>
+  <a href="services.html" data-page>Services</a>
+  <a href="about.html" data-page>About</a>
+  <a href="contact.html" data-page>Contact</a>
+  <a href="contact.html" data-page style="color:var(--accent);margin-top:20px;font-size:24px;">Get Free Pickup →</a>
+</div>
+
+<!-- HERO (video background) -->
+<section id="hero">
+  <div class="hero-video-wrap">
+    <iframe src="https://www.youtube.com/embed/YlhVHIVmF30?autoplay=1&mute=1&loop=1&playlist=YlhVHIVmF30&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-reveal="up">India's Certified E-Waste Partner</div>
+    <h1 class="hero-h1" data-reveal="up" data-delay="1">
+      Your E-Waste<br>Has Value.
+      <span class="line2">We Make Sure<br>It Doesn't.</span>
+    </h1>
+    <p class="hero-sub" data-reveal="up" data-delay="2">End-to-end e-waste management for modern businesses — secure, compliant, and built for scale.</p>
+    <div class="hero-btns" data-reveal="up" data-delay="3">
+      <a href="contact.html" class="btn-p" data-page>Get Free Pickup <span class="arrow">→</span></a>
+      <a href="services.html" class="btn-s" data-page>See How It Works <span class="arrow">→</span></a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-inner">
+    <div class="stat-item" data-reveal="up">
+      <div class="stat-n"><span data-count="500" data-suffix="+">0+</span></div>
+      <div class="stat-l">Businesses Across India</div>
+    </div>
+    <div class="stat-item" data-reveal="up" data-delay="1">
+      <div class="stat-n"><span data-count="100" data-suffix="%">0%</span></div>
+      <div class="stat-l">Compliant Disposal</div>
+    </div>
+    <div class="stat-item" data-reveal="up" data-delay="2">
+      <div class="stat-n"><span class="accent">Zero</span></div>
+      <div class="stat-l">Data Leakage Incidents</div>
+    </div>
+    <div class="stat-item" data-reveal="up" data-delay="3">
+      <div class="stat-n"><span data-count="10" data-suffix="K+">0K+</span></div>
+      <div class="stat-l">Tonnes Recycled Responsibly</div>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE SLIDER -->
+<section id="slider-section">
+  <div class="slider-head" data-reveal="up">
+    <span class="label">Our Work</span>
+    <h2 class="sec-title">Recycling that's<br><em>actually visible.</em></h2>
+  </div>
+  <div class="slider-track-wrap">
+    <div class="slider-track" id="sliderTrack">
+      <div class="slide">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="E-waste collection facility">
+        <div class="slide-caption">Collection & Sorting Facility</div>
+      </div>
+      <div class="slide">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Circuit boards being recycled">
+        <div class="slide-caption">Circuit Board Processing</div>
+      </div>
+      <div class="slide">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Secure data destruction">
+        <div class="slide-caption">Secure Data Destruction</div>
+      </div>
+      <div class="slide">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Material separation">
+        <div class="slide-caption">Material Separation & Recovery</div>
+      </div>
+      <div class="slide">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="E-waste logistics">
+        <div class="slide-caption">Logistics & Transportation</div>
+      </div>
+      <div class="slide">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Certified recycling">
+        <div class="slide-caption">Certified Recycling Process</div>
+      </div>
+      <div class="slide">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Industrial processing">
+        <div class="slide-caption">Industrial E-Waste Processing</div>
+      </div>
+      <div class="slide">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Documentation and compliance">
+        <div class="slide-caption">Documentation & Compliance</div>
+      </div>
+    </div>
+  </div>
+  <div class="slider-controls">
+    <div class="slider-dots" id="sliderDots"></div>
+    <div class="slider-arrows">
+      <button class="sl-arrow" id="slPrev" aria-label="Previous">←</button>
+      <button class="sl-arrow" id="slNext" aria-label="Next">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES PREVIEW -->
+<section id="services-preview">
+  <div class="svc-head" data-reveal="up">
+    <div>
+      <span class="label">What We Do</span>
+      <h2 class="sec-title">Everything Your E-Waste<br>Needs. <em>Nothing It Doesn't.</em></h2>
+    </div>
+    <a href="services.html" class="btn-s" data-page>All Services <span class="arrow">→</span></a>
+  </div>
+  <div class="svc-grid">
+    <a href="services.html#data" class="svc-card" data-page data-reveal="up">
+      <span class="svc-num">01</span>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+      </div>
+      <div class="svc-title">Secure Data Destruction</div>
+      <p class="svc-desc">Certified wiping, degaussing, and physical shredding. Your data doesn't leave alive.</p>
+      <span class="svc-link">Learn more →</span>
+    </a>
+    <a href="services.html#pickup" class="svc-card" data-page data-reveal="up" data-delay="1">
+      <span class="svc-num">02</span>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div class="svc-title">Doorstep Pickup</div>
+      <p class="svc-desc">We come to you. Anywhere in India. Scheduled, tracked, fully documented.</p>
+      <span class="svc-link">Learn more →</span>
+    </a>
+    <a href="services.html#itad" class="svc-card" data-page data-reveal="up" data-delay="2">
+      <span class="svc-num">03</span>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="svc-title">IT Asset Disposal</div>
+      <p class="svc-desc">Dispose smart, recover value. Bulk handling for offices and enterprises.</p>
+      <span class="svc-link">Learn more →</span>
+    </a>
+    <a href="services.html#compliance" class="svc-card" data-page data-reveal="up" data-delay="3">
+      <span class="svc-num">04</span>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <div class="svc-title">Compliance & Certification</div>
+      <p class="svc-desc">CPCB-compliant. Form 6 documentation. Green certificates. No loopholes.</p>
+      <span class="svc-link">Learn more →</span>
+    </a>
+  </div>
+</section>
+
+<!-- VIDEO HIGHLIGHT -->
+<section id="video-highlight">
+  <iframe src="https://www.youtube.com/embed/YlhVHIVmF30?autoplay=1&mute=1&loop=1&playlist=YlhVHIVmF30&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <div class="vh-overlay">
+    <div class="vh-content" data-reveal="scale">
+      <blockquote>"Responsible recycling<br>isn't optional anymore.<br><em>It's infrastructure.</em>"</blockquote>
+      <p>— Renuvia, India's Certified E-Waste Partner</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS PREVIEW -->
+<section id="process-preview">
+  <div class="process-bg-text">PROCESS</div>
+  <div class="container">
+    <div style="text-align:center;margin-bottom:72px;" data-reveal="up">
+      <span class="label">How It Works</span>
+      <h2 class="sec-title">Five steps.<br><em>Zero gaps.</em></h2>
+    </div>
+    <div class="steps-row">
+      <div class="step-card" data-reveal="up">
+        <div class="step-circle">01</div>
+        <div class="step-t">Schedule Pickup</div>
+        <p class="step-d">Tell us what you have, where you are, and when works for you.</p>
+      </div>
+      <div class="step-card" data-reveal="up" data-delay="1">
+        <div class="step-circle">02</div>
+        <div class="step-t">We Collect & Audit</div>
+        <p class="step-d">Our team inventories every item and transports it securely.</p>
+      </div>
+      <div class="step-card" data-reveal="up" data-delay="2">
+        <div class="step-circle">03</div>
+        <div class="step-t">Data Destruction</div>
+        <p class="step-d">Certified wiping and physical destruction. Nothing survives.</p>
+      </div>
+      <div class="step-card" data-reveal="up" data-delay="3">
+        <div class="step-circle">04</div>
+        <div class="step-t">Certified Recycling</div>
+        <p class="step-d">All material processed through authorized channels only.</p>
+      </div>
+      <div class="step-card" data-reveal="up" data-delay="4">
+        <div class="step-circle">05</div>
+        <div class="step-t">Documentation</div>
+        <p class="step-d">Full compliance certificates and audit trail delivered to you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY RENUVIA -->
+<section id="why-strip">
+  <div class="why-inner">
+    <div class="why-left" data-reveal="left">
+      <span class="label">Why Renuvia</span>
+      <h2 class="sec-title">Built for<br>businesses.<br><em>Not individuals.</em></h2>
+      <div class="why-list">
+        <div class="why-item">
+          <span class="wi-n">01</span>
+          <div class="wi-body"><h4>Pan-India Pickup Network</h4><p>Wherever your locations — we're there.</p></div>
+        </div>
+        <div class="why-item">
+          <span class="wi-n">02</span>
+          <div class="wi-body"><h4>Certified Recycling Ecosystem</h4><p>Fully authorized chain-of-custody at every stage.</p></div>
+        </div>
+        <div class="why-item">
+          <span class="wi-n">03</span>
+          <div class="wi-body"><h4>Transparent Documentation</h4><p>Verifiable records every compliance officer trusts.</p></div>
+        </div>
+        <div class="why-item">
+          <span class="wi-n">04</span>
+          <div class="wi-body"><h4>Data Security First</h4><p>Treated as mission-critical, not an afterthought.</p></div>
+        </div>
+        <div class="why-item">
+          <span class="wi-n">05</span>
+          <div class="wi-body"><h4>Operational Scale</h4><p>One office to a national fleet refresh — we handle it.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="why-right" data-reveal="right">
+      <div class="why-right-bg"></div>
+      <div class="why-big"><span data-count="100" data-suffix="%">0%</span></div>
+      <p>Compliant disposal every single time. No exceptions, no loopholes, no shortcuts. Our certifications back every claim we make.</p>
+      <div class="cert-row">
+        <span class="cert-tag">CPCB Certified</span>
+        <span class="cert-tag">ISO Compliant</span>
+        <span class="cert-tag">Form 6 Ready</span>
+        <span class="cert-tag">Green Certified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="home-cta">
+  <div class="cta-box" data-reveal="scale">
+    <div>
+      <h2>Your E-Waste Is Piling Up.<br>Let's Clear It the Right Way.</h2>
+      <p>Responsible recycling isn't optional anymore.</p>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="contact.html" class="btn-dark" data-page>Get Free Consultation <span class="arrow">→</span></a>
+      <a href="services.html" class="btn-s" data-page style="border-color:rgba(8,8,7,.3);color:#080807;">All Services <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <a href="index.html" class="nav-logo" data-page>Ren<span>uvia</span></a>
+      <p>End-to-end e-waste management built for modern businesses across India.</p>
+    </div>
+    <div class="f-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services.html#data" data-page>Secure Data Destruction</a></li>
+        <li><a href="services.html#pickup" data-page>Doorstep Pickup</a></li>
+        <li><a href="services.html#itad" data-page>IT Asset Disposal</a></li>
+        <li><a href="services.html#compliance" data-page>Compliance & Certification</a></li>
+        <li><a href="services.html#recycling" data-page>E-Waste Recycling</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html" data-page>About Us</a></li>
+        <li><a href="about.html#process" data-page>Our Process</a></li>
+        <li><a href="about.html#why" data-page>Why Renuvia</a></li>
+        <li><a href="contact.html" data-page>Contact</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Compliance</h5>
+      <ul>
+        <li><a href="#">CPCB Authorization</a></li>
+        <li><a href="#">Form 6 Documentation</a></li>
+        <li><a href="#">Green Certificates</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-tagline">Responsible recycling isn't optional anymore.</p>
+    <p class="footer-copy">© 2026 Renuvia. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+/* ── IMAGE SLIDER ── */
+(function(){
+  const track = document.getElementById('sliderTrack');
+  const slides = track.querySelectorAll('.slide');
+  const dotsWrap = document.getElementById('sliderDots');
+  const total = Math.ceil(slides.length / 2); // 2 visible
+  let current = 0;
+  let autoTimer;
+
+  // Build dots
+  for(let i=0;i<total;i++){
+    const d = document.createElement('button');
+    d.className = 'slider-dot' + (i===0?' active':'');
+    d.addEventListener('click',()=>goTo(i));
+    dotsWrap.appendChild(d);
+  }
+
+  function goTo(idx){
+    current = (idx+total)%total;
+    const slideW = slides[0].offsetWidth + 20; // gap
+    track.style.transform = `translateX(-${current * slideW * 2}px)`;
+    dotsWrap.querySelectorAll('.slider-dot').forEach((d,i)=>{
+      d.classList.toggle('active', i===current);
+    });
+  }
+
+  document.getElementById('slNext').addEventListener('click',()=>{goTo(current+1); resetAuto();});
+  document.getElementById('slPrev').addEventListener('click',()=>{goTo(current-1); resetAuto();});
+
+  function startAuto(){ autoTimer = setInterval(()=>goTo(current+1), 4500); }
+  function resetAuto(){ clearInterval(autoTimer); startAuto(); }
+  startAuto();
+
+  // Recalc on resize
+  window.addEventListener('resize',()=>goTo(current));
+})();
+</script>
+</body>
+</html>

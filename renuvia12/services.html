@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Renuvia</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ═══ SERVICES PAGE ═══ */
+
+/* ── PAGE HERO ── */
+#svc-hero {
+  position: relative; min-height: 70vh;
+  display: flex; align-items: flex-end;
+  padding: 0 56px 80px; overflow: hidden;
+}
+.svc-hero-video {
+  position: absolute; inset: 0;
+}
+.svc-hero-video video {
+  width:100%; height:100%; object-fit:cover;
+  filter: brightness(.3) saturate(.5);
+}
+.svc-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(8,8,7,.97) 0%, rgba(8,8,7,.55) 50%, rgba(8,8,7,.3) 100%);
+}
+.svc-hero-content { position: relative; z-index:2; max-width:1200px; margin:0 auto; width:100%; }
+.breadcrumb {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; color: var(--text3); margin-bottom: 32px;
+  letter-spacing: .06em;
+}
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb span { opacity: .4; }
+
+/* ── SERVICE INTRO ── */
+#svc-intro { background: var(--bg2); padding: 80px 56px; }
+.svc-intro-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.svc-intro-text p { font-size: 17px; color: var(--text2); font-weight: 300; line-height: 1.75; }
+.svc-intro-text p + p { margin-top: 20px; }
+.svc-intro-list {
+  display: flex; flex-direction: column; gap: 0;
+}
+.svc-intro-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 0; border-bottom: 1px solid var(--border);
+  font-size: 15px; color: var(--text2); font-weight: 300;
+}
+.svc-intro-item:first-child { border-top: 1px solid var(--border); }
+.svc-intro-item::before {
+  content: ''; flex-shrink: 0;
+  width: 28px; height: 1px; background: var(--accent);
+}
+
+/* ── SERVICE SECTIONS ── */
+.svc-section {
+  padding: 100px 56px;
+  position: relative; overflow: hidden;
+}
+.svc-section:nth-child(odd) { background: var(--bg); }
+.svc-section:nth-child(even) { background: var(--bg2); }
+
+.svc-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.svc-inner.reverse { direction: rtl; }
+.svc-inner.reverse > * { direction: ltr; }
+
+.svc-media {
+  aspect-ratio: 4/3; position: relative; overflow: hidden;
+  border-radius: var(--r-lg);
+}
+.svc-media img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(.8) saturate(.7);
+  transition: transform .8s cubic-bezier(.4,0,.2,1), filter .5s;
+}
+.svc-section:hover .svc-media img { transform: scale(1.04); filter: brightness(.9) saturate(.9); }
+.svc-media-overlay {
+  position: absolute; inset: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, rgba(200,242,64,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.svc-tag {
+  position: absolute; top: 20px; left: 20px; z-index: 2;
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); background: rgba(8,8,7,.8);
+  border: 1px solid var(--border3); padding: 6px 14px; border-radius: 2px;
+}
+
+.svc-text {}
+.svc-num-big {
+  font-family: var(--ff-h); font-size: 100px; font-weight: 800;
+  letter-spacing: -.05em; color: rgba(200,242,64,.08);
+  line-height: 1; margin-bottom: -24px; user-select: none;
+}
+.svc-text h2 {
+  font-family: var(--ff-h); font-size: clamp(28px,3.5vw,42px);
+  font-weight: 800; letter-spacing: -.025em; color: var(--text);
+  line-height: 1.1; margin-bottom: 12px;
+}
+.svc-tagline {
+  font-size: 16px; color: var(--accent); font-weight: 500; font-style: italic;
+  margin-bottom: 20px;
+}
+.svc-text p {
+  font-size: 15px; color: var(--text2); font-weight: 300; line-height: 1.75;
+  margin-bottom: 28px;
+}
+.svc-deliverables h4 {
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 16px;
+}
+.svc-deliverables ul {
+  list-style: none; display: flex; flex-direction: column; gap: 10px;
+}
+.svc-deliverables li {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; color: var(--text2);
+}
+.svc-deliverables li::before {
+  content: ''; flex-shrink: 0;
+  width: 20px; height: 1px; background: var(--accent);
+}
+
+/* ── CONNECT SECTION ── */
+#svc-connect { background: var(--bg); padding: 80px 56px; }
+.connect-inner {
+  max-width: 1200px; margin: 0 auto;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 48px; flex-wrap: wrap; position: relative; overflow: hidden;
+}
+.connect-inner::before {
+  content: ''; position: absolute; right: -60px; top: -60px;
+  width: 240px; height: 240px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,242,64,.08), transparent 70%);
+}
+.connect-text h2 {
+  font-family: var(--ff-h); font-size: clamp(24px,3vw,36px);
+  font-weight: 800; letter-spacing: -.025em; color: var(--text); line-height: 1.1;
+}
+.connect-text h2 em { font-style: normal; color: var(--accent); }
+.connect-text p { font-size: 15px; color: var(--text2); font-weight: 300; margin-top: 12px; }
+
+/* ── SERVICE NAV (sticky) ── */
+.svc-sticky-nav {
+  position: sticky; top: 64px; z-index: 100;
+  background: rgba(15,15,13,.95); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 56px;
+}
+.svc-sticky-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; gap: 0; overflow-x: auto;
+  scrollbar-width: none;
+}
+.svc-sticky-inner::-webkit-scrollbar { display: none; }
+.svc-nav-link {
+  flex-shrink: 0;
+  font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text3); text-decoration: none;
+  padding: 18px 24px; border-bottom: 2px solid transparent;
+  transition: color var(--trans), border-color var(--trans);
+  white-space: nowrap;
+}
+.svc-nav-link:hover { color: var(--text); }
+.svc-nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width:1024px) {
+  #svc-hero { padding: 0 32px 64px; }
+  .svc-intro-inner { grid-template-columns: 1fr; gap: 48px; }
+  .svc-inner { grid-template-columns: 1fr; gap: 40px; }
+  .svc-inner.reverse { direction: ltr; }
+  .connect-inner { padding: 40px; }
+  .svc-sticky-nav { padding: 0 32px; }
+  .svc-section { padding: 80px 32px; }
+  #svc-intro, #svc-connect { padding: 64px 32px; }
+}
+@media (max-width:768px) {
+  #svc-hero { padding: 0 20px 48px; min-height:55vh; }
+  .svc-section { padding: 64px 20px; }
+  #svc-intro, #svc-connect { padding: 56px 20px; }
+  .svc-sticky-nav { padding: 0 20px; }
+  .connect-inner { padding: 28px; flex-direction: column; }
+  .svc-num-big { font-size: 72px; }
+}
+</style>
+</head>
+<body>
+
+<div id="page-transition"></div>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo" data-page>Ren<span>uvia</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-page>Home</a></li>
+    <li><a href="services.html" data-page>Services</a></li>
+    <li><a href="about.html" data-page>About</a></li>
+    <li><a href="contact.html" data-page>Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta" data-page>Get Free Pickup</a>
+  <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mob-menu">
+  <a href="index.html" data-page>Home</a>
+  <a href="services.html" data-page>Services</a>
+  <a href="about.html" data-page>About</a>
+  <a href="contact.html" data-page>Contact</a>
+  <a href="contact.html" data-page style="color:var(--accent);margin-top:20px;font-size:24px;">Get Free Pickup →</a>
+</div>
+
+<!-- PAGE HERO -->
+<section id="svc-hero">
+  <div class="svc-hero-video">
+    <iframe src="https://www.youtube.com/embed/YlhVHIVmF30?autoplay=1&mute=1&loop=1&playlist=YlhVHIVmF30&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+  <div class="svc-hero-overlay"></div>
+  <div class="svc-hero-content">
+    <div class="breadcrumb" data-reveal="up">
+      <a href="index.html" data-page>Home</a>
+      <span>/</span>
+      <span>Services</span>
+    </div>
+    <span class="label" data-reveal="up">What We Do</span>
+    <h1 class="page-title" data-reveal="up" data-delay="1">
+      E-waste is not<br>one problem.<br><em>It is multiple.</em>
+    </h1>
+    <p class="sub" data-reveal="up" data-delay="2" style="margin-top:24px;">Data security. Compliance. Logistics. Environmental impact. Our services handle all of it — end to end, without gaps.</p>
+  </div>
+</section>
+
+<!-- STICKY SERVICE NAV -->
+<div class="svc-sticky-nav" id="svcStickyNav">
+  <div class="svc-sticky-inner">
+    <a href="#data"       class="svc-nav-link" data-snav>Secure Data Destruction</a>
+    <a href="#pickup"     class="svc-nav-link" data-snav>Doorstep Pickup</a>
+    <a href="#itad"       class="svc-nav-link" data-snav>IT Asset Disposal</a>
+    <a href="#compliance" class="svc-nav-link" data-snav>Compliance</a>
+    <a href="#recycling"  class="svc-nav-link" data-snav>E-Waste Recycling</a>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section id="svc-intro">
+  <div class="svc-intro-inner">
+    <div class="svc-intro-text" data-reveal="left">
+      <span class="label">Our Services</span>
+      <h2 class="sec-title" style="margin-bottom:28px;">Everything Your<br>E-Waste Needs.<br><em>Nothing It Doesn't.</em></h2>
+      <p>Renuvia operates as a single partner for complete e-waste management. No fragmented vendors. No process gaps. Every service is designed to work as part of one seamless system.</p>
+      <p>From the moment we pick up your devices to the final certificate delivered to your inbox — every step is tracked, documented, and verifiable.</p>
+    </div>
+    <div class="svc-intro-list" data-reveal="right">
+      <div class="svc-intro-item">Secure data destruction with full audit trail</div>
+      <div class="svc-intro-item">Pan-India doorstep pickup scheduling</div>
+      <div class="svc-intro-item">IT asset disposal with value recovery</div>
+      <div class="svc-intro-item">CPCB-compliant certified recycling</div>
+      <div class="svc-intro-item">End-to-end documentation delivery</div>
+      <div class="svc-intro-item">One partner, zero handoffs, full accountability</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 1: DATA DESTRUCTION -->
+<div class="svc-section" id="data">
+  <div class="svc-inner">
+    <div class="svc-media" data-reveal="left">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Secure data destruction facility">
+      <div class="svc-media-overlay"></div>
+      <span class="svc-tag">Service 01</span>
+    </div>
+    <div class="svc-text" data-reveal="right">
+      <div class="svc-num-big">01</div>
+      <h2>Secure Data Destruction</h2>
+      <p class="svc-tagline">Your data doesn't leave alive.</p>
+      <p>Your data should never leave your control, even when your devices do. We provide certified data destruction through industry-approved methods including data wiping, degaussing, and physical shredding. Every process is documented and verifiable, ensuring zero data leakage.</p>
+      <div class="svc-deliverables">
+        <h4>What You Get</h4>
+        <ul>
+          <li>Certified data destruction report</li>
+          <li>On-site and off-site options</li>
+          <li>Audit-ready documentation</li>
+          <li>Degaussing and physical shredding</li>
+        </ul>
+      </div>
+      <div style="margin-top:32px;">
+        <a href="contact.html" class="btn-p" data-page>Schedule This Service <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE 2: PICKUP -->
+<div class="svc-section" id="pickup">
+  <div class="svc-inner reverse">
+    <div class="svc-media" data-reveal="right">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="E-waste pickup logistics">
+      <div class="svc-media-overlay"></div>
+      <span class="svc-tag">Service 02</span>
+    </div>
+    <div class="svc-text" data-reveal="left">
+      <div class="svc-num-big">02</div>
+      <h2>Doorstep Pickup</h2>
+      <p class="svc-tagline">We come to you. Anywhere.</p>
+      <p>E-waste handling starts with efficient collection. We provide scheduled pickups across locations, ensuring safe transportation of your electronic waste from your premises to authorized facilities. No delays. No uncertainty.</p>
+      <div class="svc-deliverables">
+        <h4>What You Get</h4>
+        <ul>
+          <li>Flexible pickup scheduling</li>
+          <li>Pan-India coverage</li>
+          <li>Safe and tracked transportation</li>
+          <li>Manifest and chain-of-custody docs</li>
+        </ul>
+      </div>
+      <div style="margin-top:32px;">
+        <a href="contact.html" class="btn-p" data-page>Schedule a Pickup <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE 3: ITAD -->
+<div class="svc-section" id="itad">
+  <div class="svc-inner">
+    <div class="svc-media" data-reveal="left">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="IT asset disposal facility">
+      <div class="svc-media-overlay"></div>
+      <span class="svc-tag">Service 03</span>
+    </div>
+    <div class="svc-text" data-reveal="right">
+      <div class="svc-num-big">03</div>
+      <h2>IT Asset Disposal</h2>
+      <p class="svc-tagline">Dispose smart. Recover value.</p>
+      <p>Outdated IT equipment is not just waste — it's recoverable value and potential risk. We help businesses dispose of IT assets in a way that maximizes recovery while ensuring complete data security and compliance. Bulk handling for offices, warehouses, and enterprises.</p>
+      <div class="svc-deliverables">
+        <h4>What You Get</h4>
+        <ul>
+          <li>Bulk IT asset handling</li>
+          <li>Asset tracking and reporting</li>
+          <li>Value recovery where applicable</li>
+          <li>Complete data sanitization</li>
+        </ul>
+      </div>
+      <div style="margin-top:32px;">
+        <a href="contact.html" class="btn-p" data-page>Discuss Your Assets <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE 4: COMPLIANCE -->
+<div class="svc-section" id="compliance">
+  <div class="svc-inner reverse">
+    <div class="svc-media" data-reveal="right">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Compliance documentation">
+      <div class="svc-media-overlay"></div>
+      <span class="svc-tag">Service 04</span>
+    </div>
+    <div class="svc-text" data-reveal="left">
+      <div class="svc-num-big">04</div>
+      <h2>Compliance & Certification</h2>
+      <p class="svc-tagline">No loopholes. No risk.</p>
+      <p>Improper e-waste disposal is a legal risk. We ensure that all recycling is done through authorized channels, with complete adherence to regulatory requirements. Every transaction is backed by proper documentation — so your compliance officers sleep well.</p>
+      <div class="svc-deliverables">
+        <h4>What You Get</h4>
+        <ul>
+          <li>CPCB-compliant disposal</li>
+          <li>Form 6 documentation</li>
+          <li>Green certificates issued</li>
+          <li>Full regulatory coverage</li>
+        </ul>
+      </div>
+      <div style="margin-top:32px;">
+        <a href="contact.html" class="btn-p" data-page>Get Compliant Now <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE 5: RECYCLING -->
+<div class="svc-section" id="recycling">
+  <div class="svc-inner">
+    <div class="svc-media" data-reveal="left">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Certified e-waste recycling">
+      <div class="svc-media-overlay"></div>
+      <span class="svc-tag">Service 05</span>
+    </div>
+    <div class="svc-text" data-reveal="right">
+      <div class="svc-num-big">05</div>
+      <h2>E-Waste Recycling</h2>
+      <p class="svc-tagline">Nothing is wasted. Nothing is informal.</p>
+      <p>Recycling is not just about disposal — it's about recovering what still holds value. All collected e-waste is processed through certified recycling systems where materials are safely extracted and reused. Nothing is handled informally.</p>
+      <div class="svc-deliverables">
+        <h4>What You Get</h4>
+        <ul>
+          <li>Responsible material recovery</li>
+          <li>Certified recycling processes</li>
+          <li>Environmentally safe handling</li>
+          <li>Material utilization reports</li>
+        </ul>
+      </div>
+      <div style="margin-top:32px;">
+        <a href="contact.html" class="btn-p" data-page>Start Recycling <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT ALL CONNECTS -->
+<section style="background:var(--bg);padding:100px 56px;" id="connect">
+  <div class="container">
+    <div style="text-align:center;max-width:640px;margin:0 auto 64px;" data-reveal="up">
+      <span class="label">Integration</span>
+      <h2 class="sec-title">How It All Comes<br><em>Together</em></h2>
+      <p class="sub" style="margin:16px auto 0;">Our services aren't standalone — they operate as a single connected system. From pickup to destruction to recycling, every step is linked, tracked, and documented.</p>
+    </div>
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" data-reveal="up">
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px;">
+        <div style="font-family:var(--ff-h);font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;">Collection Phase</div>
+        <p style="font-size:14px;color:var(--text2);font-weight:300;line-height:1.7;">Scheduling → Pickup → Inventory audit → Secure transport</p>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px;">
+        <div style="font-family:var(--ff-h);font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;">Processing Phase</div>
+        <p style="font-size:14px;color:var(--text2);font-weight:300;line-height:1.7;">Data destruction → Asset recovery → Material separation → Certified recycling</p>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px;">
+        <div style="font-family:var(--ff-h);font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;">Compliance Phase</div>
+        <p style="font-size:14px;color:var(--text2);font-weight:300;line-height:1.7;">Form 6 filing → Green certificates → Audit trail → Documentation delivery</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="svc-connect" style="background:var(--bg2);padding:80px 56px;">
+  <div class="connect-inner" data-reveal="scale">
+    <div class="connect-text">
+      <h2>E-waste does not manage itself.<br><em>Let's build a system that does.</em></h2>
+      <p>One call. One partner. Complete coverage.</p>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;position:relative;z-index:1;">
+      <a href="contact.html" class="btn-p" data-page>Schedule a Pickup <span class="arrow">→</span></a>
+      <a href="contact.html" class="btn-s" data-page>Talk to Our Team <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <a href="index.html" class="nav-logo" data-page>Ren<span>uvia</span></a>
+      <p>End-to-end e-waste management built for modern businesses across India.</p>
+    </div>
+    <div class="f-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#data">Secure Data Destruction</a></li>
+        <li><a href="#pickup">Doorstep Pickup</a></li>
+        <li><a href="#itad">IT Asset Disposal</a></li>
+        <li><a href="#compliance">Compliance & Certification</a></li>
+        <li><a href="#recycling">E-Waste Recycling</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html" data-page>About Us</a></li>
+        <li><a href="about.html#process" data-page>Our Process</a></li>
+        <li><a href="about.html#why" data-page>Why Renuvia</a></li>
+        <li><a href="contact.html" data-page>Contact</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Compliance</h5>
+      <ul>
+        <li><a href="#">CPCB Authorization</a></li>
+        <li><a href="#">Form 6 Documentation</a></li>
+        <li><a href="#">Green Certificates</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-tagline">Responsible recycling isn't optional anymore.</p>
+    <p class="footer-copy">© 2026 Renuvia. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+/* ── STICKY SERVICE NAV ACTIVE STATE ── */
+const snavLinks = document.querySelectorAll('[data-snav]');
+const sections  = ['data','pickup','itad','compliance','recycling'].map(id=>document.getElementById(id));
+const stickyH   = document.getElementById('svcStickyNav').offsetHeight + 80;
+function updateStickyNav(){
+  let active = 0;
+  sections.forEach((s,i)=>{ if(s && window.scrollY >= s.offsetTop - stickyH - 20) active = i; });
+  snavLinks.forEach((l,i)=>l.classList.toggle('active', i===active));
+}
+window.addEventListener('scroll', updateStickyNav, {passive:true});
+updateStickyNav();
+
+/* ── SMOOTH SCROLL FOR ANCHOR LINKS ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+</script>
+</body>
+</html>

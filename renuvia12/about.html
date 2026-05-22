@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Renuvia</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ═══ ABOUT PAGE ═══ */
+
+/* ── PAGE HERO ── */
+#about-hero {
+  position: relative; min-height: 85vh;
+  display: flex; align-items: flex-end;
+  padding: 0 56px 90px; overflow: hidden;
+}
+.abt-hero-video { position: absolute; inset: 0; }
+.abt-hero-video video {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(.28) saturate(.5);
+}
+.abt-hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(0deg, rgba(8,8,7,.98) 0%, rgba(8,8,7,.5) 55%, rgba(8,8,7,.25) 100%),
+    radial-gradient(ellipse 60% 60% at 20% 80%, rgba(200,242,64,.07), transparent 60%);
+}
+.abt-hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
+.breadcrumb {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; color: var(--text3); margin-bottom: 32px;
+  letter-spacing: .06em;
+}
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb span { opacity: .4; }
+
+/* ── STATEMENT SECTION ── */
+#statement { background: var(--bg2); padding: 100px 56px; }
+.statement-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: .4fr 1fr; gap: 100px; align-items: start;
+}
+.statement-left {}
+.statement-right {}
+.statement-right .big-text {
+  font-family: var(--ff-h); font-size: clamp(28px,3.5vw,46px);
+  font-weight: 700; letter-spacing: -.025em; color: var(--text);
+  line-height: 1.25; margin-bottom: 40px;
+}
+.statement-right .big-text em { font-style: normal; color: var(--accent); }
+.statement-right p {
+  font-size: 16px; color: var(--text2); font-weight: 300; line-height: 1.8; margin-bottom: 20px;
+}
+.highlight-line {
+  border-left: 2px solid var(--accent); padding-left: 24px; margin: 32px 0;
+  font-family: var(--ff-h); font-size: 20px; font-weight: 700;
+  color: var(--text); letter-spacing: -.01em; line-height: 1.4;
+}
+
+/* ── WHO WE ARE SPLIT ── */
+#who { background: var(--bg); padding: 100px 56px; }
+.who-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.who-img-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.who-img {
+  border-radius: var(--r-lg); overflow: hidden;
+  position: relative;
+}
+.who-img:nth-child(1) { grid-row: span 2; }
+.who-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(.75) saturate(.7);
+  transition: transform .6s cubic-bezier(.4,0,.2,1), filter .4s;
+}
+.who-img:hover img { transform: scale(1.06); filter: brightness(.9) saturate(.9); }
+.who-img:nth-child(1) { aspect-ratio: auto; }
+.who-img:nth-child(2),
+.who-img:nth-child(3) { aspect-ratio: 4/3; }
+.who-text h2 { margin-bottom: 24px; }
+.who-text p { font-size: 15px; color: var(--text2); font-weight: 300; line-height: 1.75; margin-bottom: 20px; }
+
+/* ── WHY WE EXIST ── */
+#why-exist { background: var(--bg2); padding: 100px 56px; }
+.why-exist-inner {
+  max-width: 1200px; margin: 0 auto;
+}
+.why-exist-top {
+  margin-bottom: 72px;
+}
+.why-exist-cards {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+}
+.we-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 40px 32px;
+  position: relative; overflow: hidden;
+  transition: background var(--trans), border-color var(--trans);
+}
+.we-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width .4s cubic-bezier(.4,0,.2,1);
+}
+.we-card:hover { background: var(--bg4); border-color: var(--border2); }
+.we-card:hover::before { width: 100%; }
+.we-card-n {
+  font-family: var(--ff-h); font-size: 48px; font-weight: 800;
+  letter-spacing: -.03em; color: rgba(200,242,64,.12); line-height: 1;
+  margin-bottom: 16px;
+}
+.we-card h3 { font-family: var(--ff-h); font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 14px; }
+.we-card p { font-size: 14px; color: var(--text2); font-weight: 300; line-height: 1.7; }
+
+/* ── PROCESS ── */
+#abt-process { background: var(--bg); padding: 100px 56px; position: relative; overflow: hidden; }
+.proc-bg { position: absolute; inset: 0; pointer-events: none; }
+.proc-bg::before {
+  content: 'PROCESS'; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: var(--ff-h); font-size: 200px; font-weight: 800;
+  color: rgba(255,255,255,.016); letter-spacing: -.05em;
+  white-space: nowrap; pointer-events: none;
+}
+.proc-inner { max-width: 1200px; margin: 0 auto; }
+.proc-head { margin-bottom: 72px; }
+.proc-timeline { display: flex; flex-direction: column; gap: 0; }
+.proc-item {
+  display: grid; grid-template-columns: 80px 1fr; gap: 40px;
+  padding: 36px 0; border-bottom: 1px solid var(--border);
+  position: relative; transition: padding var(--trans);
+}
+.proc-item:first-child { border-top: 1px solid var(--border); }
+.proc-item:hover { padding-left: 12px; }
+.proc-num {
+  font-family: var(--ff-h); font-size: 13px; font-weight: 700;
+  color: var(--accent); letter-spacing: .08em; padding-top: 4px;
+}
+.proc-body h4 { font-family: var(--ff-h); font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.proc-body p { font-size: 14px; color: var(--text2); font-weight: 300; line-height: 1.7; }
+
+/* ── APPROACH ── */
+#approach { background: var(--bg2); padding: 100px 56px; }
+.approach-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.approach-img { aspect-ratio: 3/4; border-radius: var(--r-lg); overflow: hidden; }
+.approach-img img { width:100%; height:100%; object-fit:cover; filter:brightness(.75) saturate(.65); }
+.approach-text {}
+.approach-text h2 { margin-bottom: 28px; }
+.approach-text p { font-size: 16px; color: var(--text2); font-weight: 300; line-height: 1.8; margin-bottom: 20px; }
+.closing-statement {
+  margin-top: 40px; padding: 32px;
+  background: rgba(200,242,64,.05); border: 1px solid var(--border3);
+  border-radius: var(--r-lg);
+}
+.closing-statement p {
+  font-family: var(--ff-h); font-size: 20px; font-weight: 700;
+  color: var(--text); line-height: 1.45; letter-spacing: -.01em; margin-bottom: 0;
+}
+.closing-statement p em { font-style: normal; color: var(--accent); }
+
+/* ── WHY RENUVIA (ID anchor) ── */
+#why { background: var(--bg); padding: 100px 56px; }
+.why-inner { max-width: 1200px; margin: 0 auto; }
+.why-items { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; margin-top: 60px; }
+.why-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 36px 32px;
+  display: flex; gap: 20px; align-items: flex-start;
+  transition: background var(--trans);
+}
+.why-card:hover { background: var(--bg4); }
+.why-card-num {
+  font-family: var(--ff-h); font-size: 13px; font-weight: 700;
+  color: var(--accent); min-width: 28px;
+}
+.why-card h4 { font-family: var(--ff-h); font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.why-card p { font-size: 13px; color: var(--text2); font-weight: 300; line-height: 1.65; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:1024px) {
+  #about-hero { padding: 0 32px 72px; }
+  .statement-inner { grid-template-columns: 1fr; gap: 40px; }
+  .who-grid { grid-template-columns: 1fr; gap: 48px; }
+  .why-exist-cards { grid-template-columns: repeat(2,1fr); }
+  .approach-inner { grid-template-columns: 1fr; gap: 48px; }
+  .why-items { grid-template-columns: 1fr; }
+  #statement, #who, #why-exist, #abt-process, #approach, #why { padding: 80px 32px; }
+}
+@media (max-width:768px) {
+  #about-hero { padding: 0 20px 56px; min-height:65vh; }
+  #statement, #who, #why-exist, #abt-process, #approach, #why { padding: 64px 20px; }
+  .why-exist-cards { grid-template-columns: 1fr; }
+  .who-img-grid { grid-template-columns: 1fr; }
+  .who-img:nth-child(1) { grid-row: auto; }
+  .who-img { aspect-ratio: 16/9 !important; }
+  .proc-item { grid-template-columns: 60px 1fr; gap: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="page-transition"></div>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo" data-page>Ren<span>uvia</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-page>Home</a></li>
+    <li><a href="services.html" data-page>Services</a></li>
+    <li><a href="about.html" data-page>About</a></li>
+    <li><a href="contact.html" data-page>Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta" data-page>Get Free Pickup</a>
+  <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mob-menu">
+  <a href="index.html" data-page>Home</a>
+  <a href="services.html" data-page>Services</a>
+  <a href="about.html" data-page>About</a>
+  <a href="contact.html" data-page>Contact</a>
+  <a href="contact.html" data-page style="color:var(--accent);margin-top:20px;font-size:24px;">Get Free Pickup →</a>
+</div>
+
+<!-- PAGE HERO -->
+<section id="about-hero">
+  <div class="abt-hero-video">
+    <iframe src="https://www.youtube.com/embed/YlhVHIVmF30?autoplay=1&mute=1&loop=1&playlist=YlhVHIVmF30&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+  <div class="abt-hero-overlay"></div>
+  <div class="abt-hero-content">
+    <div class="breadcrumb" data-reveal="up">
+      <a href="index.html" data-page>Home</a>
+      <span>/</span>
+      <span>About</span>
+    </div>
+    <span class="label" data-reveal="up">About Renuvia</span>
+    <h1 class="page-title" data-reveal="up" data-delay="1">
+      We don't just<br>recycle e-waste.<br><em>We fix what<br>businesses ignore.</em>
+    </h1>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section id="statement">
+  <div class="statement-inner">
+    <div class="statement-left" data-reveal="left">
+      <span class="label">Our Story</span>
+      <p style="font-size:13px;color:var(--text3);font-weight:300;margin-top:16px;line-height:1.8;">Founded to solve a problem most businesses didn't even acknowledge they had.</p>
+    </div>
+    <div class="statement-right" data-reveal="right">
+      <p class="big-text">Renuvia was built to solve a growing problem — companies generating e-waste <em>faster than they can manage it.</em></p>
+      <p>What looks like scrap is actually a mix of sensitive data, valuable materials, and compliance risk. Most businesses discovered this too late — after a data breach, a regulatory fine, or a PR disaster.</p>
+      <p>We step in to handle all of it. Securely. Transparently. At scale.</p>
+      <div class="highlight-line">From collection to certified recycling, every step is handled with precision, compliance, and accountability.</div>
+      <p>We work with companies that don't have the time, systems, or expertise to deal with electronic waste internally — and can't afford to get it wrong.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE ARE -->
+<section id="who">
+  <div class="who-grid">
+    <div class="who-img-grid" data-reveal="left">
+      <div class="who-img">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Renuvia facility" style="height:100%;min-height:400px;">
+      </div>
+      <div class="who-img">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="E-waste sorting">
+      </div>
+      <div class="who-img">
+        <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Circuit board processing">
+      </div>
+    </div>
+    <div class="who-text" data-reveal="right">
+      <span class="label">Who We Are</span>
+      <h2 class="sec-title">An end-to-end<br>partner. Not a<br><em>vendor.</em></h2>
+      <p>Renuvia is an end-to-end e-waste management partner built for modern businesses. We're not a pickup company. We're not just a recycler. We are the complete system your business needs.</p>
+      <p>From collection to certified recycling, every step in our operation is designed to reduce your risk, ensure compliance, and recover value where it exists.</p>
+      <p>Every step is handled with precision — because in e-waste management, the details are where the risks live.</p>
+      <div style="margin-top:32px;">
+        <a href="services.html" class="btn-p" data-page>View Our Services <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY WE EXIST -->
+<section id="why-exist">
+  <div class="why-exist-inner">
+    <div class="why-exist-top" data-reveal="up">
+      <span class="label">Why We Exist</span>
+      <h2 class="sec-title" style="max-width:600px;">E-waste is mishandled.<br><em>Most of the time.</em></h2>
+      <p class="sub" style="margin-top:16px;">E-waste is one of the fastest-growing waste streams in the world, and most of it is still handled incorrectly. For businesses, it's not just about disposal.</p>
+    </div>
+    <div class="why-exist-cards">
+      <div class="we-card" data-reveal="up">
+        <div class="we-card-n">01</div>
+        <h3>Data Security</h3>
+        <p>Every device holds data. Even "wiped" drives can be recovered. Proper destruction isn't optional — it's the only option that actually protects you.</p>
+      </div>
+      <div class="we-card" data-reveal="up" data-delay="1">
+        <div class="we-card-n">02</div>
+        <h3>Legal Compliance</h3>
+        <p>India's e-waste regulations are expanding. Improper disposal carries real legal risk. We make sure you stay ahead of every requirement.</p>
+      </div>
+      <div class="we-card" data-reveal="up" data-delay="2">
+        <div class="we-card-n">03</div>
+        <h3>Environmental Responsibility</h3>
+        <p>Electronic waste contains toxic materials that contaminate soil and water when improperly discarded. We ensure responsible, certified processing.</p>
+      </div>
+    </div>
+    <div style="margin-top:48px;padding:40px;background:rgba(200,242,64,.05);border:1px solid var(--border3);border-radius:var(--r-lg);" data-reveal="up">
+      <p style="font-family:var(--ff-h);font-size:clamp(18px,2.5vw,28px);font-weight:700;color:var(--text);line-height:1.4;letter-spacing:-.015em;">We exist to make sure companies don't have to choose between doing it quickly and doing it right. With Renuvia, you get both.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="abt-process">
+  <div class="proc-bg"></div>
+  <div class="proc-inner">
+    <div class="proc-head" data-reveal="up">
+      <span class="label">How We Work</span>
+      <h2 class="sec-title">Every step is<br>trackable. <em>Compliant.</em></h2>
+    </div>
+    <div class="proc-timeline">
+      <div class="proc-item" data-reveal="up">
+        <div class="proc-num">01</div>
+        <div class="proc-body">
+          <h4>Understand Your Requirement</h4>
+          <p>We assess your e-waste volume, device types, locations, and any specific compliance or security requirements before anything else.</p>
+        </div>
+      </div>
+      <div class="proc-item" data-reveal="up" data-delay="1">
+        <div class="proc-num">02</div>
+        <div class="proc-body">
+          <h4>Schedule Pickup</h4>
+          <p>Coordinated pickup slots that work around your operations — no disruption, no delays, full flexibility.</p>
+        </div>
+      </div>
+      <div class="proc-item" data-reveal="up" data-delay="2">
+        <div class="proc-num">03</div>
+        <div class="proc-body">
+          <h4>Collect and Audit</h4>
+          <p>Every item is inventoried, tagged, and documented at the time of collection. Chain of custody begins immediately.</p>
+        </div>
+      </div>
+      <div class="proc-item" data-reveal="up" data-delay="3">
+        <div class="proc-num">04</div>
+        <div class="proc-body">
+          <h4>Destroy Sensitive Data</h4>
+          <p>Certified wiping, degaussing, or physical shredding — chosen based on device type and your security requirements.</p>
+        </div>
+      </div>
+      <div class="proc-item" data-reveal="up" data-delay="4">
+        <div class="proc-num">05</div>
+        <div class="proc-body">
+          <h4>Recycle Through Certified Channels</h4>
+          <p>All material is processed through our network of authorized recycling partners. Nothing goes to informal channels.</p>
+        </div>
+      </div>
+      <div class="proc-item" data-reveal="up" data-delay="5">
+        <div class="proc-num">06</div>
+        <div class="proc-body">
+          <h4>Provide Full Documentation</h4>
+          <p>Certificates, Form 6 filings, audit trail, and material utilization reports — delivered directly to your compliance team.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="approach-inner">
+    <div class="approach-img" data-reveal="left">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Renuvia approach">
+    </div>
+    <div class="approach-text" data-reveal="right">
+      <span class="label">Our Approach</span>
+      <h2 class="sec-title">Business-critical.<br>Not an<br><em>afterthought.</em></h2>
+      <p>We believe e-waste management should be treated like a business-critical function, not a line item to minimize. That means clear processes, zero shortcuts, and complete accountability at every stage.</p>
+      <p>No vague claims. No hidden handling. No unnecessary complexity. What we commit to, we execute exactly as described — with documentation to prove it.</p>
+      <div class="closing-statement">
+        <p>What you throw away still matters.<br><em>We make sure it's handled the way it should be.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY RENUVIA -->
+<section id="why">
+  <div class="why-inner">
+    <div data-reveal="up">
+      <span class="label">Why Renuvia</span>
+      <h2 class="sec-title">Five reasons businesses<br>choose us over anyone else.</h2>
+    </div>
+    <div class="why-items">
+      <div class="why-card" data-reveal="up">
+        <span class="why-card-num">01</span>
+        <div><h4>Built for Businesses, Not Individuals</h4><p>Our processes, documentation, and operations are designed for corporate volumes, compliance requirements, and enterprise risk management.</p></div>
+      </div>
+      <div class="why-card" data-reveal="up" data-delay="1">
+        <span class="why-card-num">02</span>
+        <div><h4>Pan-India Pickup Capability</h4><p>Wherever your offices and warehouses are — Delhi, Mumbai, Chennai, Bengaluru, or tier-2 cities — we operate there.</p></div>
+      </div>
+      <div class="why-card" data-reveal="up" data-delay="2">
+        <span class="why-card-num">03</span>
+        <div><h4>Certified Recycling Partners</h4><p>Every downstream partner is vetted, authorized, and verified. Full chain-of-custody from your premises to final recycling.</p></div>
+      </div>
+      <div class="why-card" data-reveal="up" data-delay="3">
+        <span class="why-card-num">04</span>
+        <div><h4>Transparent and Verifiable Processes</h4><p>We document everything — and not just to say we do. Every certificate and record is independently verifiable.</p></div>
+      </div>
+      <div class="why-card" data-reveal="up" data-delay="4" style="grid-column: span 2;">
+        <span class="why-card-num">05</span>
+        <div><h4>Focus on Data Security and Compliance</h4><p>We understand that for most businesses, the real risk isn't the e-waste itself — it's the data it contains and the regulations it triggers. We're built around that reality.</p></div>
+      </div>
+    </div>
+    <div style="margin-top:56px;text-align:center;" data-reveal="up">
+      <a href="contact.html" class="btn-p" data-page>Start Working with Us <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <a href="index.html" class="nav-logo" data-page>Ren<span>uvia</span></a>
+      <p>End-to-end e-waste management built for modern businesses across India.</p>
+    </div>
+    <div class="f-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services.html#data" data-page>Secure Data Destruction</a></li>
+        <li><a href="services.html#pickup" data-page>Doorstep Pickup</a></li>
+        <li><a href="services.html#itad" data-page>IT Asset Disposal</a></li>
+        <li><a href="services.html#compliance" data-page>Compliance & Certification</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html" data-page>About Us</a></li>
+        <li><a href="#abt-process">Our Process</a></li>
+        <li><a href="#why">Why Renuvia</a></li>
+        <li><a href="contact.html" data-page>Contact</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Compliance</h5>
+      <ul>
+        <li><a href="#">CPCB Authorization</a></li>
+        <li><a href="#">Form 6 Documentation</a></li>
+        <li><a href="#">Green Certificates</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-tagline">Responsible recycling isn't optional anymore.</p>
+    <p class="footer-copy">© 2026 Renuvia. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

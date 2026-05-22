@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Renuvia</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ═══ CONTACT PAGE ═══ */
+
+/* ── PAGE HERO ── */
+#contact-hero {
+  position: relative; min-height: 60vh;
+  display: flex; align-items: flex-end;
+  padding: 0 56px 80px; overflow: hidden;
+}
+.ct-hero-video { position: absolute; inset: 0; }
+.ct-hero-video video {
+  width:100%; height:100%; object-fit:cover;
+  filter: brightness(.25) saturate(.4);
+}
+.ct-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(8,8,7,.98) 0%, rgba(8,8,7,.5) 55%, rgba(8,8,7,.2) 100%);
+}
+.ct-hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
+.breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--text3); margin-bottom: 32px; letter-spacing: .06em; }
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb span { opacity: .4; }
+
+/* ── MAIN CONTACT SECTION ── */
+#contact-main { background: var(--bg); padding: 100px 56px; }
+.contact-wrap { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; align-items: start; }
+
+/* LEFT INFO */
+.ct-info {}
+.ct-info h2 { margin-bottom: 20px; }
+.ct-info > p { font-size: 16px; color: var(--text2); font-weight: 300; line-height: 1.75; margin-bottom: 48px; }
+.ct-details { display: flex; flex-direction: column; gap: 0; margin-bottom: 48px; }
+.ct-detail {
+  display: flex; align-items: flex-start; gap: 20px;
+  padding: 24px 0; border-bottom: 1px solid var(--border);
+  transition: padding var(--trans);
+}
+.ct-detail:first-child { border-top: 1px solid var(--border); }
+.ct-detail:hover { padding-left: 8px; }
+.ct-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background: rgba(200,242,64,.07); border: 1px solid var(--border3);
+  border-radius: var(--r); display: flex; align-items: center; justify-content: center;
+  margin-top: 2px;
+}
+.ct-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; }
+.ct-detail-body h4 { font-family: var(--ff-h); font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; letter-spacing: .02em; }
+.ct-detail-body p { font-size: 14px; color: var(--text2); font-weight: 300; }
+.ct-certifications { display: flex; flex-wrap: wrap; gap: 8px; }
+.ct-cert {
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent); background: rgba(200,242,64,.06);
+  border: 1px solid var(--border3); padding: 6px 14px; border-radius: 2px;
+}
+
+/* RIGHT FORM */
+.ct-form-wrap {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 48px;
+  position: sticky; top: 100px;
+}
+.ct-form-title {
+  font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 32px; display: block;
+}
+.ct-form { display: flex; flex-direction: column; gap: 20px; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.f-group { display: flex; flex-direction: column; gap: 8px; }
+.f-group label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); }
+.f-group input,
+.f-group select,
+.f-group textarea {
+  background: var(--bg2); border: 1px solid var(--border2);
+  color: var(--text); font-family: var(--ff-b); font-size: 14px;
+  padding: 14px 16px; border-radius: var(--r); outline: none;
+  transition: border-color var(--trans), background var(--trans);
+  appearance: none; -webkit-appearance: none;
+}
+.f-group input:focus,
+.f-group select:focus,
+.f-group textarea:focus { border-color: var(--accent); background: var(--bg); }
+.f-group input::placeholder,
+.f-group textarea::placeholder { color: var(--text3); }
+.f-group textarea { resize: vertical; min-height: 130px; }
+.f-group select option { background: var(--bg3); color: var(--text); }
+.ct-submit {
+  width: 100%; font-family: var(--ff-b); font-size: 13px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  background: var(--accent); color: #080807;
+  padding: 16px; border: none; cursor: pointer;
+  border-radius: var(--r); margin-top: 4px;
+  transition: background var(--trans), transform .15s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.ct-submit:hover { background: var(--accent2); transform: translateY(-2px); }
+.form-success {
+  display: none; text-align: center; padding: 48px 24px;
+}
+.form-success .check {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(200,242,64,.12); border: 1px solid var(--border3);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px; font-size: 24px; color: var(--accent);
+}
+.form-success h3 { font-family: var(--ff-h); font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+.form-success p { font-size: 14px; color: var(--text2); font-weight: 300; }
+
+/* ── WHY CONTACT US ── */
+#contact-why { background: var(--bg2); padding: 80px 56px; }
+.cw-inner { max-width: 1200px; margin: 0 auto; }
+.cw-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px; }
+.cw-card {
+  padding: 32px; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  position: relative; overflow: hidden;
+}
+.cw-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width .4s cubic-bezier(.4,0,.2,1);
+}
+.cw-card:hover::after { width: 100%; }
+.cw-card h4 { font-family: var(--ff-h); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.cw-card p { font-size: 13px; color: var(--text2); font-weight: 300; line-height: 1.7; }
+.cw-card-icon { margin-bottom: 20px; }
+.cw-card-icon svg { width: 28px; height: 28px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; }
+
+/* ── FAQ ── */
+#faq { background: var(--bg); padding: 80px 56px; }
+.faq-inner { max-width: 800px; margin: 0 auto; }
+.faq-list { margin-top: 56px; display: flex; flex-direction: column; gap: 0; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-q {
+  width: 100%; background: none; border: none; text-align: left; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 0; gap: 16px;
+  font-family: var(--ff-h); font-size: 17px; font-weight: 700;
+  color: var(--text); letter-spacing: -.01em;
+  transition: color var(--trans);
+}
+.faq-q:hover { color: var(--accent); }
+.faq-q .faq-icon {
+  width: 28px; height: 28px; flex-shrink: 0;
+  border: 1px solid var(--border2); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: var(--text2);
+  transition: transform var(--trans), border-color var(--trans), color var(--trans);
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--accent); color: var(--accent); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .45s cubic-bezier(.4,0,.2,1), padding .3s;
+  font-size: 14px; color: var(--text2); font-weight: 300; line-height: 1.75;
+}
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 24px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:1024px) {
+  #contact-hero { padding: 0 32px 64px; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 48px; }
+  .ct-form-wrap { position: static; }
+  .cw-grid { grid-template-columns: repeat(2,1fr); }
+  #contact-main, #contact-why, #faq { padding: 80px 32px; }
+}
+@media (max-width:768px) {
+  #contact-hero { padding: 0 20px 56px; min-height:50vh; }
+  #contact-main, #contact-why, #faq { padding: 64px 20px; }
+  .ct-form-wrap { padding: 28px; }
+  .f-row { grid-template-columns: 1fr; }
+  .cw-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="page-transition"></div>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo" data-page>Ren<span>uvia</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-page>Home</a></li>
+    <li><a href="services.html" data-page>Services</a></li>
+    <li><a href="about.html" data-page>About</a></li>
+    <li><a href="contact.html" data-page>Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta" data-page>Get Free Pickup</a>
+  <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mob-menu">
+  <a href="index.html" data-page>Home</a>
+  <a href="services.html" data-page>Services</a>
+  <a href="about.html" data-page>About</a>
+  <a href="contact.html" data-page>Contact</a>
+  <a href="contact.html" data-page style="color:var(--accent);margin-top:20px;font-size:24px;">Get Free Pickup →</a>
+</div>
+
+<!-- PAGE HERO -->
+<section id="contact-hero">
+  <div class="ct-hero-video">
+    <iframe src="https://www.youtube.com/embed/YlhVHIVmF30?autoplay=1&mute=1&loop=1&playlist=YlhVHIVmF30&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+  <div class="ct-hero-overlay"></div>
+  <div class="ct-hero-content">
+    <div class="breadcrumb" data-reveal="up">
+      <a href="index.html" data-page>Home</a>
+      <span>/</span>
+      <span>Contact</span>
+    </div>
+    <span class="label" data-reveal="up">Get In Touch</span>
+    <h1 class="page-title" data-reveal="up" data-delay="1">
+      When Your E-Waste<br>Needs to Be<br><em>Handled Right</em>
+    </h1>
+    <p class="sub" data-reveal="up" data-delay="2" style="margin-top:24px;">If you have devices piling up, data you cannot risk, or compliance you need to fix — this is where it starts.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTACT -->
+<section id="contact-main">
+  <div class="contact-wrap">
+
+    <!-- LEFT INFO -->
+    <div class="ct-info" data-reveal="left">
+      <span class="label">Contact Details</span>
+      <h2 class="sec-title" style="margin-bottom:20px;">Let's talk about<br>your <em>e-waste.</em></h2>
+      <p>Reach out and we will guide you through secure pickup, destruction, and certified recycling. Most businesses we work with are surprised how simple the process actually is.</p>
+
+      <div class="ct-details">
+        <div class="ct-detail">
+          <div class="ct-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.59 6.59l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="ct-detail-body">
+            <h4>Phone</h4>
+            <p>+91 98765 43210</p>
+          </div>
+        </div>
+        <div class="ct-detail">
+          <div class="ct-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="ct-detail-body">
+            <h4>Email</h4>
+            <p>contact@renuvia.in</p>
+          </div>
+        </div>
+        <div class="ct-detail">
+          <div class="ct-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="ct-detail-body">
+            <h4>Coverage</h4>
+            <p>Pan-India — Delhi, Mumbai, Bengaluru, Chennai, and 40+ cities</p>
+          </div>
+        </div>
+        <div class="ct-detail">
+          <div class="ct-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          </div>
+          <div class="ct-detail-body">
+            <h4>Response Time</h4>
+            <p>Within 4 business hours. Pickups scheduled within 48 hours.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">Our Certifications</p>
+        <div class="ct-certifications">
+          <span class="ct-cert">CPCB Certified</span>
+          <span class="ct-cert">ISO Compliant</span>
+          <span class="ct-cert">Form 6 Ready</span>
+          <span class="ct-cert">Green Certified</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div data-reveal="right">
+      <div class="ct-form-wrap">
+        <span class="ct-form-title">Start with a quick request</span>
+        <div id="ct-form-inner">
+          <form class="ct-form" id="ctForm" novalidate>
+            <div class="f-row">
+              <div class="f-group">
+                <label for="fn">Full Name *</label>
+                <input type="text" id="fn" placeholder="Arjun Mehta" required>
+              </div>
+              <div class="f-group">
+                <label for="co">Company *</label>
+                <input type="text" id="co" placeholder="Acme Corp." required>
+              </div>
+            </div>
+            <div class="f-row">
+              <div class="f-group">
+                <label for="em">Email Address *</label>
+                <input type="email" id="em" placeholder="you@company.com" required>
+              </div>
+              <div class="f-group">
+                <label for="ph">Phone Number</label>
+                <input type="tel" id="ph" placeholder="+91 98765 43210">
+              </div>
+            </div>
+            <div class="f-group">
+              <label for="svc">Service Required *</label>
+              <select id="svc" required>
+                <option value="" disabled selected>Select a service…</option>
+                <option>Secure Data Destruction</option>
+                <option>Doorstep Pickup</option>
+                <option>IT Asset Disposal</option>
+                <option>Compliance & Certification</option>
+                <option>E-Waste Recycling</option>
+                <option>Multiple Services / Full Package</option>
+                <option>Not Sure — Need Guidance</option>
+              </select>
+            </div>
+            <div class="f-group">
+              <label for="city">City / Location</label>
+              <input type="text" id="city" placeholder="Mumbai">
+            </div>
+            <div class="f-group">
+              <label for="msg">Tell Us More</label>
+              <textarea id="msg" placeholder="Approximate volume, device types, special requirements, timeline…"></textarea>
+            </div>
+            <button type="submit" class="ct-submit">
+              Request a Pickup <span class="arrow">→</span>
+            </button>
+          </form>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="check">✓</div>
+          <h3>Request Received</h3>
+          <p>We'll get back to you within 4 business hours to confirm your pickup schedule.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY CONTACT US -->
+<section id="contact-why">
+  <div class="cw-inner">
+    <div data-reveal="up">
+      <span class="label">Why Reach Out</span>
+      <h2 class="sec-title">Most businesses wait<br>too long. <em>Don't.</em></h2>
+    </div>
+    <div class="cw-grid">
+      <div class="cw-card" data-reveal="up">
+        <div class="cw-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>Data Risk Grows Daily</h4>
+        <p>Every day old devices sit in storage, the data risk grows. Drives can be stolen, accessed, or mishandled. Act before it becomes a breach.</p>
+      </div>
+      <div class="cw-card" data-reveal="up" data-delay="1">
+        <div class="cw-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+        </div>
+        <h4>Compliance Deadlines</h4>
+        <p>CPCB regulations around e-waste are evolving. Companies that don't have documented disposal processes face increasing scrutiny and penalties.</p>
+      </div>
+      <div class="cw-card" data-reveal="up" data-delay="2">
+        <div class="cw-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h4>Easy to Start</h4>
+        <p>One form, one call. We handle everything from logistics to certification. Most businesses are surprised how simple working with us actually is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-inner">
+    <div data-reveal="up">
+      <span class="label">FAQ</span>
+      <h2 class="sec-title">Common questions<br>answered <em>clearly.</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">How quickly can you schedule a pickup? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Most pickups are scheduled within 48 business hours of your request confirmation. For urgent requirements, we can often accommodate within 24 hours depending on your location.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you operate outside major metros? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. Our pickup network covers 40+ cities across India including tier-2 locations. Mention your city in the form and we'll confirm coverage details.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What documents do we receive after recycling? <span class="faq-icon">+</span></button>
+        <div class="faq-a">You receive a complete documentation package: data destruction certificate, Form 6 filing, recycling certificates, and a full asset-level manifest. All documents are audit-ready.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What's the minimum volume for a pickup? <span class="faq-icon">+</span></button>
+        <div class="faq-a">We work with businesses from small office cleanouts to large enterprise fleet disposals. Contact us with your volume and we'll advise the most efficient approach.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can we watch the data destruction process? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. We offer witnessed destruction for sensitive devices where your team or compliance officers are present during the process. We also provide video-documented destruction on request.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you handle residential e-waste? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Renuvia is built for business volumes. Our processes, documentation, and pricing are designed for corporate clients. For individual residential devices, we recommend checking your local municipal e-waste program.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <a href="index.html" class="nav-logo" data-page>Ren<span>uvia</span></a>
+      <p>End-to-end e-waste management built for modern businesses across India.</p>
+    </div>
+    <div class="f-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services.html#data" data-page>Secure Data Destruction</a></li>
+        <li><a href="services.html#pickup" data-page>Doorstep Pickup</a></li>
+        <li><a href="services.html#itad" data-page>IT Asset Disposal</a></li>
+        <li><a href="services.html#compliance" data-page>Compliance & Certification</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html" data-page>About Us</a></li>
+        <li><a href="about.html#abt-process" data-page>Our Process</a></li>
+        <li><a href="about.html#why" data-page>Why Renuvia</a></li>
+        <li><a href="contact.html" data-page>Contact</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Compliance</h5>
+      <ul>
+        <li><a href="#">CPCB Authorization</a></li>
+        <li><a href="#">Form 6 Documentation</a></li>
+        <li><a href="#">Green Certificates</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-tagline">Responsible recycling isn't optional anymore.</p>
+    <p class="footer-copy">© 2026 Renuvia. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+/* ── FAQ ACCORDION ── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* ── FORM SUBMISSION ── */
+document.getElementById('ctForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  const fn   = document.getElementById('fn').value.trim();
+  const em   = document.getElementById('em').value.trim();
+  const svc  = document.getElementById('svc').value;
+  if (!fn || !em || !svc) {
+    // shake
+    form.style.animation = 'shake .3s ease';
+    setTimeout(() => form.style.animation = '', 350);
+    return;
+  }
+  document.getElementById('ct-form-inner').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+</script>
+<style>
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-8px); }
+  75%      { transform: translateX(8px); }
+}
+</style>
+</body>
+</html>
