@@ -42,19 +42,29 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── MOBILE MENU ── */
   const ham = document.getElementById('ham');
   const mobMenu = document.getElementById('mob-menu');
+  const mobCloseBtn = document.getElementById('mobCloseBtn');
+
+  function openMenu() {
+    ham.classList.add('open');
+    mobMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    ham.classList.remove('open');
+    mobMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   if (ham && mobMenu) {
     ham.addEventListener('click', () => {
-      ham.classList.toggle('open');
-      mobMenu.classList.toggle('open');
-      document.body.style.overflow = mobMenu.classList.contains('open') ? 'hidden' : '';
+      mobMenu.classList.contains('open') ? closeMenu() : openMenu();
     });
-    mobMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        ham.classList.remove('open');
-        mobMenu.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
+    if (mobCloseBtn) mobCloseBtn.addEventListener('click', closeMenu);
+    mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    // Close on ESC key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+    // Close on backdrop click
+    mobMenu.addEventListener('click', e => { if (e.target === mobMenu) closeMenu(); });
   }
 
   /* ── ACTIVE NAV LINK ── */
