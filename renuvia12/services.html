@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Services — Renuvia</title>
 <link rel="stylesheet" href="style.css">
 <style>
@@ -194,6 +194,32 @@
   .connect-inner { padding: 28px; flex-direction: column; }
   .svc-num-big { font-size: 72px; }
 }
+
+/* ═══ RESPONSIVE — SERVICES (mobile patch) ═══ */
+@media (max-width:768px) {
+  #svc-hero { padding: 0 20px 48px; min-height:55vh; }
+  #svc-hero .page-title { font-size: clamp(36px,9vw,52px); }
+  .svc-hero-content .sub { font-size: 14px; }
+  .svc-sticky-nav { padding: 0 20px; top: 56px; }
+  .svc-nav-link { font-size: 11px; padding: 14px 14px; }
+  .svc-section { padding: 56px 20px; }
+  #svc-intro { padding: 56px 20px; }
+  .svc-intro-inner { grid-template-columns: 1fr; gap: 36px; }
+  .svc-inner { grid-template-columns: 1fr; gap: 32px; }
+  .svc-inner.reverse { direction: ltr; }
+  .svc-media { aspect-ratio: 16/9; }
+  .svc-num-big { font-size: 56px; margin-bottom: -16px; }
+  .svc-text h2 { font-size: clamp(24px,6vw,34px); }
+  .connect-inner { padding: 28px 20px; flex-direction: column; gap: 24px; }
+  #svc-connect { padding: 56px 20px; }
+  #connect { padding: 56px 20px; }
+  #connect > .container > div:last-child { grid-template-columns: 1fr !important; }
+}
+@media (max-width:480px) {
+  .svc-nav-link { font-size: 10px; padding: 12px 10px; letter-spacing: .07em; }
+  .svc-section { padding: 48px 16px; }
+  .svc-deliverables li { font-size: 13px; }
+}
 </style>
 </head>
 <body>
@@ -214,6 +240,9 @@
   <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mob-menu">
+  <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
   <a href="index.html" data-page>Home</a>
   <a href="services.html" data-page>Services</a>
   <a href="about.html" data-page>About</a>
@@ -276,7 +305,7 @@
 <div class="svc-section" id="data">
   <div class="svc-inner">
     <div class="svc-media" data-reveal="left">
-      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Secure data destruction facility">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454540/Gemini_Generated_Image_mf5g9dmf5g9dmf5g_jnj4jm.png" alt="Secure data destruction facility">
       <div class="svc-media-overlay"></div>
       <span class="svc-tag">Service 01</span>
     </div>
@@ -305,7 +334,7 @@
 <div class="svc-section" id="pickup">
   <div class="svc-inner reverse">
     <div class="svc-media" data-reveal="right">
-      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="E-waste pickup logistics">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454534/Gemini_Generated_Image_qks89lqks89lqks8_zbneuc.png" alt="E-waste pickup logistics">
       <div class="svc-media-overlay"></div>
       <span class="svc-tag">Service 02</span>
     </div>
@@ -334,7 +363,7 @@
 <div class="svc-section" id="itad">
   <div class="svc-inner">
     <div class="svc-media" data-reveal="left">
-      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="IT asset disposal facility">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454564/Gemini_Generated_Image_h8pv1kh8pv1kh8pv_emrsjt.png" alt="IT asset disposal facility">
       <div class="svc-media-overlay"></div>
       <span class="svc-tag">Service 03</span>
     </div>
@@ -392,7 +421,7 @@
 <div class="svc-section" id="recycling">
   <div class="svc-inner">
     <div class="svc-media" data-reveal="left">
-      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779445571/Gemini_Generated_Image_72ba5m72ba5m72ba_aba9c0.png" alt="Certified e-waste recycling">
+      <img src="https://res.cloudinary.com/dcdlzehhj/image/upload/v1779454576/Gemini_Generated_Image_h4ud4ph4ud4ph4ud_r1dm81.png" alt="Certified e-waste recycling">
       <div class="svc-media-overlay"></div>
       <span class="svc-tag">Service 05</span>
     </div>
